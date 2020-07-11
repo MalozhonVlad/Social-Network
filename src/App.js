@@ -1,14 +1,13 @@
 import React from 'react';
 import './App.css';
+import Technologies from "./Technologies";
+import Header from "./Header";
 
 function App() {
     return (
-        <div className="App">
-            <ul>
-                <li>CSS</li>
-                <li>HTML</li>
-                <li>React</li>
-            </ul>
+        <div>
+            <Header/>
+            <Technologies/>
         </div>
     );
 }
