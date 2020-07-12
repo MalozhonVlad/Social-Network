@@ -1,8 +1,8 @@
 .nav {
     grid-area: n;
-    background-color: chartreuse;
+    background-color: darkorange;
 }
 
 .item {
-    color: crimson;
+    color: slateblue;
 }

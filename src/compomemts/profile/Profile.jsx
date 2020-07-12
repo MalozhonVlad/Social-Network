@@ -4,7 +4,7 @@ import MyPosts from "./myPosts/MyPosts";
 
 const Profile = () => {
     return (
-        <div className={style.content}>
+        <div>
             <div>
                 <img
                     src='https://www.robertwalters.com.hk/content/dam/robert-walters/global/images/article-images/digital-neon.jpg'/>
