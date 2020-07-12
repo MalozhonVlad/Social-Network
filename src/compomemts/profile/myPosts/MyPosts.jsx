@@ -1,7 +1,7 @@
 import React from "react";
 import MyPost from "./post/MyPost";
 
-const MyPosts = () => {
+const MyPosts = (props) => {
     return (
         <div>
             My posts
@@ -11,8 +11,8 @@ const MyPosts = () => {
                 </div>
                 <button>Add post</button>
             </div>
-            <MyPost/>
-            <MyPost/>
+            <MyPost message='Hi, how are you' likesCount='10'/>
+            <MyPost message='My first post' likesCount='15'/>
         </div>
     );
 }
