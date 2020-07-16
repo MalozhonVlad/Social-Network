@@ -1,18 +1,13 @@
 import React from "react";
 import style from './Profile.module.css'
 import MyPosts from "./myPosts/MyPosts";
+import ProfileInfo from "./ProfileInfo/ProfileInfo";
 
 const Profile = () => {
     return (
-        <div>
-            <div>
-                <img
-                    src='https://www.robertwalters.com.hk/content/dam/robert-walters/global/images/article-images/digital-neon.jpg'/>
-            </div>
-            <div>
-                ava + description
-            </div>
-           <MyPosts />
+        <div >
+            <ProfileInfo/>
+            <MyPosts/>
         </div>
     );
 }
