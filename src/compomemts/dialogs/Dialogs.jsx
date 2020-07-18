@@ -5,27 +5,11 @@ import Message from "./message/Message";
 
 const Dialogs = (props) => {
 
-    let dialogs = [
-        {id: 1, name: 'Vlad'},
-        {id: 2, name: 'Andrey'},
-        {id: 3, name: 'Sergey'},
-        {id: 4, name: 'Viktor'},
-        {id: 5, name: 'Valentin'}
-    ];
-
-    let dialogsElement = dialogs.map(
+    let dialogsElement = props.dialogs.map(
         dialog => (<DialogItem id={dialog.id} name={dialog.name}/>)
     ); // очень важное преобразование !!!! 25 video !!!
 
-    let messages = [
-        {id: 1, message: 'Hi'},
-        {id: 2, message: 'How is your name'},
-        {id: 3, message: 'Yo'},
-        {id: 4, message: 'Yo'},
-        {id: 5, message: 'Yo'}
-    ]
-
-    let messagesElement = messages.map(
+    let messagesElement = props.messages.map(
       message => (<Message id={message.id}  message={message.message}/>)
     ); // очеь важно !!!
 
