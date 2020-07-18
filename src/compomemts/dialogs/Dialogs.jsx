@@ -21,7 +21,7 @@ const Message = (props) => {
 
 const Dialogs = (props) => {
 
-    let dialogsData = [
+    let dialogs = [
         {id: 1, name: 'Vlad'},
         {id: 2, name: 'Andrey'},
         {id: 3, name: 'Sergey'},
@@ -29,27 +29,29 @@ const Dialogs = (props) => {
         {id: 5, name: 'Valentin'}
     ];
 
-    let messagesData = [
+    let dialogsElement = dialogs.map(
+        dialog => (<DialogItem id={dialog.id} name={dialog.name}/>)
+    ); // очень важное преобразование !!!! 25 video !!!
+
+    let messages = [
         {id: 1, message: 'Hi'},
         {id: 2, message: 'How is your name'},
         {id: 3, message: 'Yo'},
-        {id: 4, message: 'Yo'}
+        {id: 4, message: 'Yo'},
+        {id: 5, message: 'Yo'}
     ]
+
+    let messagesElement = messages.map(
+      message => (<Message id={message.id}  message={message.message}/>)
+    ); // очеь важно !!!
 
     return (
         <div className={style.dialogs}>
             <div className={style.dialogsItems}>
-                <DialogItem name={dialogsData[0].name} id={dialogsData[0].id}/>
-                <DialogItem name={dialogsData[1].name} id={dialogsData[1].id}/>
-                <DialogItem name="Sergey" id="3"/>
-                <DialogItem name="Viktor" id="4"/>
+                {dialogsElement}
             </div>
             <div className={style.messages}>
-                <Message message={messagesData[0].message}/>
-                <Message message={messagesData[1].message}/>
-                <Message message="Yo"/>
-                <Message message="Yo"/>
-                <Message message="Yo"/>
+                {messagesElement}
             </div>
         </div>
     );
