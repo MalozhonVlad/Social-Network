@@ -13,8 +13,11 @@ import Settings from "./compomemts/settings/Settings";
 const App = (props) => {
 
     const DialogsComponent = () => <Dialogs state={props.state.dialogsPage}/>;
-    const ProfileComponent = () => <Profile state={props.state.profilePage}
+
+    const ProfileComponent = () => <Profile profilePage={props.state.profilePage}
+                                            updateNewPostText={props.updateNewPostText}
                                             addPost={props.addPost}/>;
+
     const NewsComponent = () => <News props={props.news}/>;
     const MusicComponent = () => <Music props={props.music}/>;
     const SettingsComponent = () => <Settings props={props.settings}/>;
@@ -26,9 +29,12 @@ const App = (props) => {
             <Navbar/>
             <div className='app-wrapper-content'>
 
-                <Route path="/dialogs" component={DialogsComponent}/>
+                <Route path="/dialogs" render={DialogsComponent}/>
                 {/*<Route path="/dialogs" render={ () => <Dialogs dialogs={props.dialogs} messages={props.messages}/>}/>*/}
-                <Route path="/profile" component={ProfileComponent}/>
+                {/*<Route path="/profile" component={ProfileComponent}/>*/}
+                {/*можно либо render либо component !!!*/}
+                <Route path="/profile" render={ProfileComponent}/>
+
                 <Route path="/news" component={NewsComponent}/>
                 <Route path="/music" component={MusicComponent}/>
                 <Route path="/settings" component={SettingsComponent}/>

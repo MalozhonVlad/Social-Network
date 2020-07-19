@@ -5,23 +5,27 @@ import style from "./MyPosts.module.css"
 const MyPosts = (props) => {
 
     let postsElement = props.postsData.map(
-      post => (<MyPost id={post.id} message={post.message} likesCount={post.likesCount}/>)
+        post => (<MyPost id={post.id} message={post.message} likesCount={post.likesCount}/>)
     );
 
     let newPostElement = React.createRef();
 
     let addPost = () => {
-        let text = newPostElement.current.value;
-        props.addPost(text);
-        newPostElement.current.value = '';
+        props.addPost();
     };
+
+    let onPostChange = () => {
+        let text = newPostElement.current.value;
+        props.updateNewPostText(text);
+    }
 
     return (
         <div className={style.postsBlock}>
             <h3>My posts</h3>
             <div>
                 <div>
-                    <textarea ref={newPostElement}></textarea>
+                    <textarea onChange={onPostChange} ref={newPostElement}
+                              value={props.newPostText}/>
                 </div>
                 <div>
                     <button onClick={ addPost }>Add post</button>
