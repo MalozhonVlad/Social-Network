@@ -15,8 +15,7 @@ const App = (props) => {
     const DialogsComponent = () => <Dialogs state={props.state.dialogsPage}/>;
 
     const ProfileComponent = () => <Profile profilePage={props.state.profilePage}
-                                            updateNewPostText={props.updateNewPostText}
-                                            addPost={props.addPost}/>;
+                                            dispatch={props.dispatch}/>;
 
     const NewsComponent = () => <News props={props.news}/>;
     const MusicComponent = () => <Music props={props.music}/>;
