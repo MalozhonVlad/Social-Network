@@ -2,23 +2,23 @@ import React from "react";
 import style from "./Dialogs.module.css";
 import DialogItem from "./dialogItem/DialogItem";
 import Message from "./message/Message";
+import {sendMessageCreator, updateNewMessageBodyCreator} from "../../redux/state";
 
 const Dialogs = (props) => {
 
-    let addMessages = React.createRef();
+    let state = props.store.getState().dialogsPage;
 
-    let addMessage = () => {
-        let text = addMessages.current.value;
-        alert(text);
+    let dialogsElement = state.dialogs.map(dialog => <DialogItem name={dialog.name} id={dialog.id}/>); // очень важное преобразование !!!! 25 video !!!
+    let messagesElement = state.messages.map(message => <Message message={message.message}/>); // очеь важно !!!
+    let newMessageBody = state.newMessageBody;
+
+    let onSendMessageClick = () => {
+        props.store.dispatch(sendMessageCreator())
     }
-
-    let dialogsElement = props.state.dialogs.map(
-        dialog => (<DialogItem id={dialog.id} name={dialog.name}/>)
-    ); // очень важное преобразование !!!! 25 video !!!
-
-    let messagesElement = props.state.messages.map(
-      message => (<Message id={message.id}  message={message.message}/>)
-    ); // очеь важно !!!
+    let onNewMessageChange = (e) => {
+        let body = e.target.value;
+        props.store.dispatch(updateNewMessageBodyCreator(body))
+    }
 
     return (
         <div className={style.dialogs}>
@@ -26,10 +26,16 @@ const Dialogs = (props) => {
                 {dialogsElement}
             </div>
             <div className={style.messages}>
-                {messagesElement}
-                <textarea ref={addMessages}></textarea>
+                <div>{messagesElement}</div>
                 <div>
-                    <button onClick={ addMessage }>Add post</button>
+                    <div>
+                        <textarea value={newMessageBody}
+                                  onChange={onNewMessageChange}
+                                  placeholder='Enter your message'></textarea>
+                    </div>
+                    <div>
+                        <button onClick={onSendMessageClick}>Add post</button>
+                    </div>
                 </div>
             </div>
         </div>

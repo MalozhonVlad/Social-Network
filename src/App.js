@@ -12,7 +12,7 @@ import Settings from "./compomemts/settings/Settings";
 
 const App = (props) => {
 
-    const DialogsComponent = () => <Dialogs state={props.state.dialogsPage}/>;
+    const DialogsComponent = () => <Dialogs store={props.store}/>;
 
     const ProfileComponent = () => <Profile profilePage={props.state.profilePage}
                                             dispatch={props.dispatch}/>;
