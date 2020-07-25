@@ -12,9 +12,9 @@ import DialogsContainer from "./compomemts/dialogs/DialogsContainer";
 
 const App = (props) => {
 
-    const DialogsComponent = () => <DialogsContainer store={props.store}/>;
+    const DialogsComponent = () => <DialogsContainer />;
 
-    const ProfileComponent = () => <Profile store={props.store}/>;
+    const ProfileComponent = () => <Profile />;
 
     const NewsComponent = () => <News props={props.news}/>;
     const MusicComponent = () => <Music props={props.music}/>;
