@@ -2,20 +2,19 @@ import React from 'react';
 import './App.css';
 import Header from "./compomemts/header/Header.jsx";
 import Navbar from "./compomemts/navbar/Navbar";
-import Dialogs from "./compomemts/dialogs/Dialogs";
 import Profile from "./compomemts/profile/Profile";
 import {Route} from "react-router-dom";
 import News from "./compomemts/news/News";
 import Music from "./compomemts/music/Music";
 import Settings from "./compomemts/settings/Settings";
+import DialogsContainer from "./compomemts/dialogs/DialogsContainer";
 
 
 const App = (props) => {
 
-    const DialogsComponent = () => <Dialogs store={props.store}/>;
+    const DialogsComponent = () => <DialogsContainer store={props.store}/>;
 
-    const ProfileComponent = () => <Profile profilePage={props.state.profilePage}
-                                            dispatch={props.dispatch}/>;
+    const ProfileComponent = () => <Profile store={props.store}/>;
 
     const NewsComponent = () => <News props={props.news}/>;
     const MusicComponent = () => <Music props={props.music}/>;
