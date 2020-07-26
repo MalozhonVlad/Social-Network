@@ -11,13 +11,11 @@ let mapStateToProps = (state) => { // возвразает данние со с�
 
 let mapDispatchToProps = (dispatch) => { // возвращает колбеки что нужни
     return {
-        updateNewMessageBody: () => {
-            dispatch(sendMessageCreator());
-            // dispatch(updateNewMessageBodyCreator(body));
-        },
-        sendMessage: (body) => {
+        updateNewMessageBody: (body) => {
             dispatch(updateNewMessageBodyCreator(body));
-            // dispatch(sendMessageCreator());
+        },
+        sendMessage: () => {
+            dispatch(sendMessageCreator());
         }
 
     }

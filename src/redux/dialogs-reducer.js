@@ -1,5 +1,3 @@
-import profileReducer from "./profile-reducer";
-
 const UPDATE_NEW_MESSAGE_BODY = 'UPDATE_NEW_MESSAGE_BODY';
 const SEND_MESSAGE = 'SEND_MESSAGE';
 
@@ -23,16 +21,22 @@ let initialState = {
 };
 
 const dialogsReducer = (state = initialState,action) => {
-
     switch (action.type) {
         case UPDATE_NEW_MESSAGE_BODY:
-            state.newMessageBody = action.body;
-            return state;
+            return   {
+                ...state,
+                newMessageBody: action.body
+            };
         case SEND_MESSAGE:
             let body = state.newMessageBody;
-            state.newMessageBody = '';
-            state.messages.push({id: 6, message: body});
-            return state;
+            return   {
+                ...state,
+                newMessageBody: '',
+                /**
+                 * копируем старий масив в новий (arrayCopy) + через кому добавляем еще 1 елемент в етот новий масив
+                 */
+                messages: [...state.messages, {id: 6, message: body}] // ... три точки означает что ми копируем старий обьект !!!
+            };
         default:
             return state;
     }
