@@ -25,6 +25,7 @@ const mapDispatchToProps = (dispatch) => {
 
 /**
  * создаем контейнерние компоненти(посредник) с помощью функции connect
+ * MyPostsContainer - контейнерная компонента !!!
  */
 const MyPostsContainer = connect(mapStateToProps,mapDispatchToProps)(MyPosts);
 

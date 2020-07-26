@@ -8,13 +8,15 @@ import News from "./compomemts/news/News";
 import Music from "./compomemts/music/Music";
 import Settings from "./compomemts/settings/Settings";
 import DialogsContainer from "./compomemts/dialogs/DialogsContainer";
+import UsersContainer from "./compomemts/users/UsersContainer";
 
 
 const App = (props) => {
 
-    const DialogsComponent = () => <DialogsContainer />;
+    const DialogsComponent = () => <DialogsContainer/>;
+    const ProfileComponent = () => <Profile/>;
 
-    const ProfileComponent = () => <Profile />;
+    const UsersComponent = () => <UsersContainer/>
 
     const NewsComponent = () => <News props={props.news}/>;
     const MusicComponent = () => <Music props={props.music}/>;
@@ -32,6 +34,8 @@ const App = (props) => {
                 {/*<Route path="/profile" component={ProfileComponent}/>*/}
                 {/*можно либо render либо component !!!*/}
                 <Route path="/profile" render={ProfileComponent}/>
+
+                <Route path="/users" render={UsersComponent}/>
 
                 <Route path="/news" component={NewsComponent}/>
                 <Route path="/music" component={MusicComponent}/>
