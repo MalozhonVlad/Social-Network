@@ -1,19 +1,27 @@
 const FOLLOW = 'FOLLOW';
 const UNFOLLOW = 'UNFOLLOW';
 const SET_USERS = 'SET_USERS';
+const SET_CURRENT_PAGE = 'SET_CURRENT_PAGE';
+const SET_TOTAL_USERS_COUNT = 'SET_TOTAL_USERS_COUNT';
 
 let initialState = {
-    users: [
-        // {id: 1, photoUrl: 'https://i.pinimg.com/236x/8a/05/33/8a053319bd263f33acaccd922f55e451.jpg',followed: false, fullName: 'Dmitriy', status: 'I am a boss', location: {city: 'Minsk', country: 'Belarus'} },
-        // {id: 2, photoUrl: 'https://i.pinimg.com/236x/8a/05/33/8a053319bd263f33acaccd922f55e451.jpg',followed: true, fullName: 'Vlad', status: 'I am a boss too', location: {city: 'Moscov', country: 'Russia'} },
-        // {id: 3, photoUrl: 'https://i.pinimg.com/236x/8a/05/33/8a053319bd263f33acaccd922f55e451.jpg',followed: false, fullName: 'Andrey', status: 'I am a boss too', location: {city: 'Kiev', country: 'Ukraine'} },
-        // {id: 4, photoUrl: 'https://i.pinimg.com/236x/8a/05/33/8a053319bd263f33acaccd922f55e451.jpg',followed: true, fullName: 'Valera', status: 'From USA', location: {city: 'New York', country: 'USA'} }
-    ]
+    users: [  ],
+    pageSize: 5,
+    totalUsersCount: 0,
+    currentPage: 3
 };
 
+/**
+ * все что меняется в стейте ми меняем через редюсер !!!!!
+ * state - текущий стейт приложения
+ * action - обьект в которем минимум есть тайп(type), еще могут бить елементи которие ми
+ * вставляем и передаем в стейт action={type: SET_CURRENT_PAGE, currentPage:currentPage и т.д.}
+ */
 const usersReducer = (state = initialState, action) => {
 
     switch (action.type) {
+        // ...state - старий стейт копируем но вставляем туда новую инфу из action напр. action.userId из
+        // за етого он перересовивает стейт (появляется новий елемент в стейте и ми перерисовиваем !!!)
         case FOLLOW:
         return  {
             ...state,
@@ -35,12 +43,18 @@ const usersReducer = (state = initialState, action) => {
                 })
             }
         case SET_USERS:
-            return {...state, users: [ ...state.users, ...action.users ]}
+            return {...state, users: action.users }
+        case SET_CURRENT_PAGE:
+            return {...state, currentPage: action.currentPage}
+        case SET_TOTAL_USERS_COUNT:
+            return {...state, totalUsersCount: action.totalCount}
         default:
             return state;
     }
 }
 
+export const setUsersTotalCountAC = (totalUsersCount) => ({type: SET_TOTAL_USERS_COUNT, totalCount: totalUsersCount})
+export const setCurrentPageAC = (currentPage) => ({type: SET_CURRENT_PAGE, currentPage})
 export const followAC = (userId) => ({type: FOLLOW, userId})
 export const unfollowAC = (userId) => ({type: UNFOLLOW, userId})
 export const setUsersAC = (users) => ({type: SET_USERS, users})
