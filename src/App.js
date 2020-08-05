@@ -9,12 +9,13 @@ import Music from "./compomemts/music/Music";
 import Settings from "./compomemts/settings/Settings";
 import DialogsContainer from "./compomemts/dialogs/DialogsContainer";
 import UsersContainer from "./compomemts/users/UsersContainer";
+import ProfileContainer from "./compomemts/profile/ProfileContainer";
 
 
 const App = (props) => {
 
     const DialogsComponent = () => <DialogsContainer/>;
-    const ProfileComponent = () => <Profile/>;
+    const ProfileComponent = () => <ProfileContainer/>;
 
     const UsersComponent = () => <UsersContainer/>
 
