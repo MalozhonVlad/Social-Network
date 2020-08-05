@@ -34,7 +34,7 @@ const App = (props) => {
                 {/*<Route path="/dialogs" render={ () => <Dialogs dialogs={props.dialogs} messages={props.messages}/>}/>*/}
                 {/*<Route path="/profile" component={ProfileComponent}/>*/}
                 {/*можно либо render либо component !!!*/}
-                <Route path="/profile" render={ProfileComponent}/>
+                <Route path="/profile/:userId?" render={ProfileComponent}/>
 
                 <Route path="/users" render={UsersComponent}/>
 
