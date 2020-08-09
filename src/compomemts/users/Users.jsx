@@ -2,6 +2,7 @@ import React from "react";
 import styles from "./users.module.css";
 import userPhoto from "../../assets/images/user.png";
 import {NavLink} from "react-router-dom";
+import * as axios from "axios";
 
 
 let Users = (props) => {
@@ -35,23 +36,48 @@ let Users = (props) => {
                         <div>
                             {user.followed
                                 ? <button onClick={() => {
-                                    props.unfollow(user.id)
+
+                                    axios.delete(`https://social-network.samuraijs.com/api/1.0/follow/${user.id}`, {
+                                        withCredentials: true,
+                                        headers: {
+                                            "api-key": "2a515b19-5a52-4bab-a3fc-034b49d5cb8c"
+                                        }
+                                    })
+                                        .then(response => {
+                                            if (response.data.resultCode == 0) {
+                                                props.unfollow(user.id);
+                                            }
+                                        });
+
+
                                 }}>Unfollow</button>
                                 : <button onClick={() => {
-                                    props.follow(user.id)
+
+                                    axios.post(`https://social-network.samuraijs.com/api/1.0/follow/${user.id}`, {}, {
+                                        withCredentials: true,
+                                        headers: {
+                                            "api-key": "2a515b19-5a52-4bab-a3fc-034b49d5cb8c"
+                                        }
+                                    })
+                                        .then(response => {
+                                            if (response.data.resultCode == 0) {
+                                                props.follow(user.id);
+                                            }
+                                        });
+
                                 }}>Follow</button>}
-                        </div>
-                    </span>
+                                    </div>
+                                    </span>
                 <span>
-                        <span>
-                            <div>{user.name}</div>
-                            <div>{user.status}</div>
-                        </span>
-                        <span>
-                            <div>{"user.location.country"}</div>
-                            <div>{"user.location.city"}</div>
-                        </span>
-                    </span>
+                                    <span>
+                                    <div>{user.name}</div>
+                                    <div>{user.status}</div>
+                                    </span>
+                                    <span>
+                                    <div>{"user.location.country"}</div>
+                                    <div>{"user.location.city"}</div>
+                                    </span>
+                                    </span>
             </div>)
         }
     </div>
