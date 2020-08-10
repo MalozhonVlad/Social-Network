@@ -1,16 +1,8 @@
 import React from "react";
 import {connect} from "react-redux";
-import {
-    follow,
-    setCurrentPage,
-    setUsers,
-    setUsersTotalCount, toggleFollowingProgress,
-    toggleIsFetching,
-    unfollow
-} from "../../redux/users-reducer";
+import {follow, getUsers, setCurrentPage, toggleFollowingProgress, unfollow} from "../../redux/users-reducer";
 import Users from "./Users";
 import Preloader from "../common/preloader/Preloader";
-import {usersAPI} from "../../api/api";
 
 class UsersContainer extends React.Component {
 
@@ -19,23 +11,11 @@ class UsersContainer extends React.Component {
      * етот метод визивается когда создается етот обьект и в ето время идет запрос на сервер !!!
      */
     componentDidMount() {
-        this.props.toggleIsFetching(true);
-        usersAPI.getUsers(this.props.currentPage, this.props.pageSize).then(data => {
-            this.props.toggleIsFetching(false);
-            this.props.setUsers(data.items)
-            this.props.setUsersTotalCount(data.totalCount)
-        });
+        this.props.getUsers(this.props.currentPage, this.props.pageSize);
     }
 
     onPageChanged = (pageNumber) => {
-        this.props.setCurrentPage(pageNumber);
-        this.props.toggleIsFetching(true);
-
-        usersAPI.getUsers(pageNumber, this.props.pageSize)
-            .then(data => {
-                this.props.toggleIsFetching(false);
-                this.props.setUsers(data.items)
-            });
+        this.props.getUsers(pageNumber, this.props.pageSize);
     }
 
     render() {
@@ -48,7 +28,6 @@ class UsersContainer extends React.Component {
                    users={this.props.users}
                    follow={this.props.follow}
                    unfollow={this.props.unfollow}
-                   toggleFollowingProgress={this.props.toggleFollowingProgress}
                    followingInProgress={this.props.followingInProgress}
             />
         </>
@@ -71,35 +50,6 @@ let mapStateToProps = (state) => {
 }
 
 /**
- * набор колбеков которие связивают компоненту и стейт !!!!
- * все функции которие есть в компоненту берутся от сюда через пропси
- * а тут они берутся из стейта !!!!
- */
-// let mapDispatchToProps = (dispatch) => {
-//     return {
-//         follow: (userId) => {
-//             dispatch(followAC(userId))
-//         },
-//         unfollow: (userId) => {
-//             dispatch(unfollowAC(userId))
-//         },
-//         setUsers: (users) => {
-//             dispatch(setUsersAC(users))
-//         },
-//         setCurrentPage: (pageNumber) => {
-//             dispatch(setCurrentPageAC(pageNumber))
-//         },
-//         setTotalUsersCount: (totalCount) => {
-//             dispatch(setUsersTotalCountAC(totalCount))
-//         },
-//         toggleIsFetchingAC: (isFetching) => {
-//             dispatch(toggleIsFetchingAC(isFetching))
-//         }
-//     }
-// }
-
-
-/**
  * по сути ета функция connect()() - ето и есть круговорот флакс одна фунция что передается
  * mapStateToProps - берет данние из стейта и отрисовивает и себя на фронте
  * mapDispatchToProps - закидивает данние в стейт
@@ -116,10 +66,8 @@ export default connect(mapStateToProps,
     {
         follow,
         unfollow,
-        setUsers,
         setCurrentPage,
-        setUsersTotalCount,
-        toggleIsFetching,
-        toggleFollowingProgress
+        toggleFollowingProgress,
+        getUsers
     }
 )(UsersContainer);
