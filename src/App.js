@@ -11,6 +11,7 @@ import DialogsContainer from "./compomemts/dialogs/DialogsContainer";
 import UsersContainer from "./compomemts/users/UsersContainer";
 import ProfileContainer from "./compomemts/profile/ProfileContainer";
 import HeaderContainer from "./compomemts/header/HeaderContainer";
+import Login from "./compomemts/login/Login";
 
 
 const App = (props) => {
@@ -42,6 +43,9 @@ const App = (props) => {
                 <Route path="/news" component={NewsComponent}/>
                 <Route path="/music" component={MusicComponent}/>
                 <Route path="/settings" component={SettingsComponent}/>
+
+                <Route path="/login" render={ () => <Login /> }/>
+
             </div>
         </div>
     );
