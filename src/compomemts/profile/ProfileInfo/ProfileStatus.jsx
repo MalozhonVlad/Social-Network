@@ -32,6 +32,18 @@ class ProfileStatus extends React.Component {
 
     }
 
+    /**
+     * на каждий клик обновляется компонента !!!
+     */
+    componentDidUpdate(prevProps, prevState) {
+        if (prevProps.state !== this.props.status) {
+            this.setState({
+                status: this.props.status
+            })
+        }
+        console.log("componentDidUpdate")
+    }
+
     render() {
         return (
             <div>
