@@ -4,6 +4,7 @@ import Dialogs from "./Dialogs";
 import {connect} from "react-redux";
 import {Redirect} from "react-router-dom";
 import {withAuthRedirect} from "../../hoc/withAuthRedirect";
+import {compose} from "redux";
 
 let mapStateToProps = (state) => { // возвразает данние со стейта
     return {
@@ -23,17 +24,7 @@ let mapDispatchToProps = (dispatch) => { // возвращает колбеки 
     }
 }
 
-/**
- * HOC
- * @type {RedirectComponent}
- */
-let AuthRedirectComponent = withAuthRedirect(Dialogs);
-
-/**
- *  в перевую функцию он закидивает стейт (mapStateToProps(state))
- *  во вторую закидивает store.dispatch.bind(store)
- */
-const DialogsContainer = connect(mapStateToProps, mapDispatchToProps)(AuthRedirectComponent);
-
-
-export default DialogsContainer;
+export default compose(
+    connect(mapStateToProps, mapDispatchToProps),
+    withAuthRedirect
+)(Dialogs);
