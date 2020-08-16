@@ -3,6 +3,7 @@ import {connect} from "react-redux";
 import {follow, getUsers, setCurrentPage, toggleFollowingProgress, unfollow} from "../../redux/users-reducer";
 import Users from "./Users";
 import Preloader from "../common/preloader/Preloader";
+import {withAuthRedirect} from "../../hoc/withAuthRedirect";
 
 class UsersContainer extends React.Component {
 
@@ -49,6 +50,8 @@ let mapStateToProps = (state) => {
     }
 }
 
+let withRedirect = withAuthRedirect(UsersContainer);
+
 /**
  * по сути ета функция connect()() - ето и есть круговорот флакс одна фунция что передается
  * mapStateToProps - берет данние из стейта и отрисовивает и себя на фронте
@@ -62,7 +65,7 @@ let mapStateToProps = (state) => {
 /**
  * зделали рефакторинг !!!!
  */
-export default connect(mapStateToProps,
+export default withAuthRedirect(connect(mapStateToProps,
     {
         follow,
         unfollow,
@@ -70,4 +73,4 @@ export default connect(mapStateToProps,
         toggleFollowingProgress,
         getUsers
     }
-)(UsersContainer);
+)(UsersContainer));
